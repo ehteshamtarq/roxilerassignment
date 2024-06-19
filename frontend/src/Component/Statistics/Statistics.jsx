@@ -13,15 +13,10 @@ const Statistics = ({ selectedMonth }) => {
     loadTransactions(selectedMonth);
   }, [selectedMonth]);
 
-  //   useEffect(() =>{
-  //     setSelectedMonths(selectedMonth)
-  //     loadTransactions(setMonths)
-  //   }, [])
-
   const loadTransactions = async (month, search, page) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/statistics?month=${selectedMonth}`
+        `https://roxilerassignment-zkvx.onrender.com/statistics?month=${selectedMonth}`
       );
       setTotalSales(response.data["totalSaleAmount"]);
       setSold(response.data["totalItemsSold"]);

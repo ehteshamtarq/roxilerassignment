@@ -13,7 +13,7 @@ export default function BasicPie({ selectedMonth }) {
   const loadTransactions = async (month, search, page) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/pie-chart?month=${selectedMonth}`
+        `https://roxilerassignment-zkvx.onrender.com/pie-chart?month=${selectedMonth}`
       );
 
       let data = [];

@@ -14,7 +14,7 @@ export default function BasicBars({ selectedMonth }) {
   const loadTransactions = async (month, search, page) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/bar-chart?month=${selectedMonth}`
+        `https://roxilerassignment-zkvx.onrender.com/bar-chart?month=${selectedMonth}`
       );
 
       let dataXAxis = [];

@@ -115,7 +115,7 @@ export default function CustomPaginationActionsTable({
   const loadTransactions = async (month, search, page) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/transactions?search=${searchBox}&&month=${selectedMonth}`
+        `https://roxilerassignment-zkvx.onrender.com/transactions?search=${searchBox}&&month=${selectedMonth}`
       );
       setTransactions(response.data);
     } catch (error) {
