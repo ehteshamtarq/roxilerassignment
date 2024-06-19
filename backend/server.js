@@ -6,10 +6,14 @@ const ProductTransaction = require("./models/Transaction");
 const ProductController = require("./controller/transaction.controller")
 const app = express();
 const morgan = require("morgan");
+const cors = require("cors");
 
 app.use(bodyParser.json());
 connectDB();
 app.use(morgan("dev"));
+app.use(cors());
+app.options("*", cors());
+
 
 // API to list all transactions with search and pagination
 app.get("/transactions", ProductController.getTransactions );

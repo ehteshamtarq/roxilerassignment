@@ -1,0 +1,18 @@
+  .text-box {
+    width: 200px;
+    height: 50px;
+    padding-left: 20px;
+    border-radius: 30px;
+    border: none;
+    background-color: #E4CD83;
+  }
+
+  ::placeholder {
+  color: #444341;
+  font-weight: 300;
+}
+
+
+  .text-box:focus{
+    outline:none;
+  }

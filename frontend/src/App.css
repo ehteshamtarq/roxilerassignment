@@ -1,0 +1,39 @@
+.header{
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  padding:10px;
+}
+
+
+.header p{
+  background-color:white;
+  font-size: 25px;
+  padding: 30px;
+  border-radius: 50%;
+  font-weight: 800;
+  }
+
+
+.buttons{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+
+.table{
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.statistics, .barChart,.pieChart{
+  padding-top: 50px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}

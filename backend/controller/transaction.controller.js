@@ -43,8 +43,6 @@ const getTransactions = async (req, res) => {
       $or: [{ ...dateQuery2021 }, { ...dateQuery2022 }],
       ...searchQuery,
     })
-      .skip((page - 1) * perPage)
-      .limit(parseInt(perPage, 10));
 
 
     res.status(200).json(transactions);
@@ -333,8 +331,6 @@ const getCombinedData = async (req, res) => {
       $or: [{ ...dateQuery2021 }, { ...dateQuery2022 }],
       ...searchQuery,
     })
-      .skip((page - 1) * perPage)
-      .limit(parseInt(perPage, 10));
 
     //statistics
 
