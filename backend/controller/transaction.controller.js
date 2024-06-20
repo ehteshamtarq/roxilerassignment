@@ -39,11 +39,22 @@ const getTransactions = async (req, res) => {
     : {};
 
   try {
-    const transactions = await ProductTransaction.find({
-      $or: [{ ...dateQuery2021 }, { ...dateQuery2022 }],
-      ...searchQuery,
-    })
+    const transactions1 = await ProductTransaction.find({
+      $or: [dateQuery2021, dateQuery2022],
+    });
 
+    // Filter transactions based on the search query
+    const transactions = transactions1.filter((transaction) => {
+      // Check title and description against regex
+      const titleMatch = regex.test(transaction.title);
+      const descriptionMatch = regex.test(transaction.description);
+
+      // Check price if search is a number
+      const priceMatch = transaction.price === (parseFloat(search) || 0);
+
+      // Return true if any of the conditions match
+      return titleMatch || descriptionMatch || priceMatch;
+    });
 
     res.status(200).json(transactions);
   } catch (error) {
@@ -186,7 +197,6 @@ const getBarChart = async (req, res) => {
       })
     );
 
-
     const barChartData = new Map();
     barChartData2021.forEach((item) => {
       barChartData.set(item.range, item.count);
@@ -325,12 +335,11 @@ const getCombinedData = async (req, res) => {
       }
     : {};
 
-
   try {
     const transactions = await ProductTransaction.find({
       $or: [{ ...dateQuery2021 }, { ...dateQuery2022 }],
       ...searchQuery,
-    })
+    });
 
     //statistics
 
@@ -402,7 +411,6 @@ const getCombinedData = async (req, res) => {
       })
     );
 
-
     const barChartData = new Map();
     barChartData2021.forEach((item) => {
       barChartData.set(item.range, item.count);
@@ -454,7 +462,12 @@ const getCombinedData = async (req, res) => {
       count,
     }));
 
-    res.json({transactions, Statistics, barChartDataArray, pieChartDataArray});
+    res.json({
+      transactions,
+      Statistics,
+      barChartDataArray,
+      pieChartDataArray,
+    });
   } catch (error) {
     res.status(500).json({ error: "Server error" });
   }
