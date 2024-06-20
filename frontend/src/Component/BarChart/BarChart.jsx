@@ -35,8 +35,8 @@ export default function BasicBars({ selectedMonth }) {
     <BarChart
       xAxis={[{ scaleType: "band", data: xAxis }]}
       series={[{ data: yAxis }]}
-      width={500}
-      height={300}
+      width={800}
+      height={500}
     />
   );
 }
