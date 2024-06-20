@@ -1,10 +1,8 @@
 const ProductTransaction = require("../models/Transaction");
-const ProductServices = require("../services/transaction.service");
 
 const getTransactions = async (req, res) => {
-  const { month, search = "", page = 1, perPage = 10 } = req.query;
+  const { month, search = "" } = req.query;
 
-  // Convert month to integer and calculate the start and end dates
   const monthInt = parseInt(month, 10);
   const startDate2021 = new Date(2021, monthInt - 1, 1); // Adjust the year as needed
   const endDate2021 = new Date(2021, monthInt, 1);
@@ -26,8 +24,7 @@ const getTransactions = async (req, res) => {
     },
   };
 
-  // Construct the search query
-  const regex = new RegExp(search, "i"); // Case-insensitive regex for search
+  const regex = new RegExp(search, "i"); 
   const searchQuery = search
     ? {
         $or: [
@@ -43,16 +40,12 @@ const getTransactions = async (req, res) => {
       $or: [dateQuery2021, dateQuery2022],
     });
 
-    // Filter transactions based on the search query
     const transactions = transactions1.filter((transaction) => {
-      // Check title and description against regex
       const titleMatch = regex.test(transaction.title);
       const descriptionMatch = regex.test(transaction.description);
 
-      // Check price if search is a number
       const priceMatch = transaction.price === (parseFloat(search) || 0);
 
-      // Return true if any of the conditions match
       return titleMatch || descriptionMatch || priceMatch;
     });
 
@@ -67,7 +60,7 @@ const getStatistics = async (req, res) => {
 
   const monthInt = parseInt(month, 10);
 
-  const startDate2021 = new Date(2021, monthInt - 1, 1); // Adjust the year as needed
+  const startDate2021 = new Date(2021, monthInt - 1, 1); 
   const endDate2021 = new Date(2021, monthInt, 1);
 
   const startDate2022 = new Date(2022, monthInt - 1, 1);
@@ -150,7 +143,7 @@ const getBarChart = async (req, res) => {
     [901, Infinity],
   ];
 
-  const startDate2021 = new Date(2021, monthInt - 1, 1); // Adjust the year as needed
+  const startDate2021 = new Date(2021, monthInt - 1, 1); 
   const endDate2021 = new Date(2021, monthInt, 1);
 
   const startDate2022 = new Date(2022, monthInt - 1, 1);
@@ -202,7 +195,6 @@ const getBarChart = async (req, res) => {
       barChartData.set(item.range, item.count);
     });
 
-    // Step 2: Iterate over the second array and add counts to the map
     barChartData2022.forEach((item) => {
       if (barChartData.has(item.range)) {
         barChartData.set(item.range, barChartData.get(item.range) + item.count);
@@ -226,7 +218,7 @@ const getPieChart = async (req, res) => {
   const { month } = req.query;
   const monthInt = parseInt(month, 10);
 
-  const startDate2021 = new Date(2021, monthInt - 1, 1); // Adjust the year as needed
+  const startDate2021 = new Date(2021, monthInt - 1, 1); 
   const endDate2021 = new Date(2021, monthInt, 1);
 
   const startDate2022 = new Date(2022, monthInt - 1, 1);
@@ -286,11 +278,11 @@ const getPieChart = async (req, res) => {
 };
 
 const getCombinedData = async (req, res) => {
-  const { month, search = "", page = 1, perPage = 10 } = req.query;
+  const { month, search = ""} = req.query;
 
-  // Convert month to integer and calculate the start and end dates
+
   const monthInt = parseInt(month, 10);
-  const startDate2021 = new Date(2021, monthInt - 1, 1); // Adjust the year as needed
+  const startDate2021 = new Date(2021, monthInt - 1, 1); 
   const endDate2021 = new Date(2021, monthInt, 1);
 
   const startDate2022 = new Date(2022, monthInt - 1, 1);
@@ -323,8 +315,7 @@ const getCombinedData = async (req, res) => {
     [901, Infinity],
   ];
 
-  // Construct the search query
-  const regex = new RegExp(search, "i"); // Caseinsensitive regex for search
+  const regex = new RegExp(search, "i"); 
   const searchQuery = search
     ? {
         $or: [
